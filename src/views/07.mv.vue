@@ -214,6 +214,15 @@ export default {
             this.total = res.data.total
         })
     },
+    //播放视频
+    playMv(id){
+      this.pageNum = 1
+      this.id = id
+      this._getMvUrl()
+      this._getMvDetail()
+      this._getSimiMvUrl()
+      this._getMvComment()
+    }
   }
 }
 </script>
