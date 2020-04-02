@@ -163,6 +163,7 @@ export default {
       hotComments:[],//热门评论
       hotCount:0,//热门评论
       comments:[],//普评
+      pageSize:10,//页容量
     };
   },
   created() {
@@ -204,15 +205,29 @@ export default {
         method: "get",
         params: {
           id: this.$route.query.key,
-          limit:10,
+          limit:this.pageSize,
           //根据页码计算
-          offset:(this.page-1)*10
+          offset:(this.page-1)*this.pageSize
         }
       }).then(res => {
         // console.log(res)
         this.total = res.data.total
         this.comments = res.data.comments
       });
+    },
+     //播放音乐
+    playMusic(id){
+       axios({
+        url:'https://autumnfish.cn/song/url',
+        method:'get',
+        params:{
+          id:id
+        }
+      }).then(res=>{
+        // console.log(res)
+        let url = res.data.data[0].url
+        this.$parent.musicUrl = url
+      })
     }
   }
 };
